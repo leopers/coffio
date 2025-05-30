@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <LittleFS.h>
-#include "secrets.h"  // Define ssid and password here
+#include "secrets.h" 
 
 #define RELAY_PIN D1
 
