@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Quicksand", sans-serif;
-  background: #fff5f8;
+  background: linear-gradient(135deg, #ffe0e9, #fff5f8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,12 +17,19 @@ body {
   text-align: center;
   width: 90%;
   max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 h1 {
-  color: #d27d9d;
   font-size: 28px;
   margin-bottom: 10px;
+  background: linear-gradient(90deg, #d27d9d, #ffb6c1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
@@ -39,6 +46,11 @@ h1 {
   cursor: pointer;
   transition: all 0.2s ease;
   margin: 8px 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary {
@@ -84,4 +96,20 @@ input[type="time"] {
   font-size: 14px;
   margin-top: 20px;
   color: #999;
+  transition: opacity 0.4s ease;
+}
+
+.status-text.fade {
+  opacity: 0.3;
+}
+
+@media (max-width: 400px) {
+  .card {
+    padding: 20px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
 }

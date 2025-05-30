@@ -19,5 +19,9 @@ document.getElementById("scheduleBtn").onclick = () => {
 };
 
 function updateStatus(msg) {
-  statusText.textContent = msg;
+  statusText.classList.add("fade");
+  setTimeout(() => {
+    statusText.textContent = msg;
+    statusText.classList.remove("fade");
+  }, 200);
 }
