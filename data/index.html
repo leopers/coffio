@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- iOS Web App Config -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Coffio" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="cat.jpg" />
+
     <title>Coffio Café ☕</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
@@ -12,6 +22,10 @@
   </head>
   <body>
     <div class="card">
+      <div class="mascot-wrapper">
+        <img src="cat.jpg" alt="Coffio Mascot" class="mascot" />
+      </div>
+
       <h1>☕ Coffio Café</h1>
       <p class="subtitle">Start your day with a warm cup ~</p>
 

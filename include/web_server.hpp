@@ -13,6 +13,8 @@ void setupWebServer(int relayPin) {
   server.serveStatic("/style.css", LittleFS, "/style.css");
   server.serveStatic("/script.js", LittleFS, "/script.js");
 
+  server.serveStatic("/cat.jpg", LittleFS, "/cat.jpg");
+
   server.on("/on", HTTP_GET, [relayPin]() {
     digitalWrite(relayPin, HIGH);
     Serial.println("🚀 Relay ON (coffee brewing)");

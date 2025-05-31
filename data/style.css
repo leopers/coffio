@@ -113,3 +113,56 @@ input[type="time"] {
     padding: 12px 20px;
   }
 }
+
+.logo-card {
+  margin-bottom: 20px;
+  text-align: center;
+  animation: float 4s ease-in-out infinite;
+}
+
+.card {
+  position: relative; /* key for mascot positioning */
+  background: #fff;
+  padding: 40px 30px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  margin-top: 50px; /* spacing from top */
+}
+
+.mascot-wrapper {
+  position: absolute;
+  top: -60px; /* moved further up */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff5f8;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mascot {
+  width: 80px;
+  height: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.mascot:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
