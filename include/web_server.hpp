@@ -19,6 +19,10 @@ void setupWebServer(int relayPin) {
     digitalWrite(relayPin, HIGH);
     Serial.println("🚀 Relay ON (coffee brewing)");
     server.send(200, "text/plain", "Brewing");
+
+    delay(30000);
+    digitalWrite(relayPin, LOW);
+    Serial.println("✅ Manual brew complete, relay OFF");
   });
 
   server.on("/off", HTTP_GET, [relayPin]() {

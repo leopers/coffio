@@ -37,7 +37,7 @@ void checkAndTriggerSchedule(int relayPin) {
     if (scheduledTime.length() && now == scheduledTime) {
       Serial.println("⏰ Scheduled time matched — brewing now!");
       digitalWrite(relayPin, HIGH);
-      delay(10000); // Brew duration
+      delay(30000); // Brew duration
       digitalWrite(relayPin, LOW);
       Serial.println("✅ Brew complete, relay OFF");
       scheduledTime = "";

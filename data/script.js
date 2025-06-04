@@ -1,9 +1,10 @@
 const statusText = document.getElementById("status");
+let countdownInterval = null;
 
 document.getElementById("makeCoffeeBtn").onclick = () => {
   fetch("/on")
-    .then(() => updateStatus("☕ Coffee is brewing! Yay~"))
-    .catch(() => updateStatus("⚠️ Couldn’t reach Coffio…"));
+    .then(() => startCountdown(30))
+    .catch(() => updateStatus("⚠️ Failed to start brew."));
 };
 
 document.getElementById("scheduleBtn").onclick = () => {
@@ -19,9 +20,24 @@ document.getElementById("scheduleBtn").onclick = () => {
 };
 
 function updateStatus(msg) {
-  statusText.classList.add("fade");
-  setTimeout(() => {
-    statusText.textContent = msg;
-    statusText.classList.remove("fade");
-  }, 200);
+  statusText.textContent = msg;
+}
+
+function startCountdown(seconds) {
+  let remaining = seconds;
+
+  updateStatus(`☕ Brewing... ${remaining}s remaining`);
+
+  if (countdownInterval) clearInterval(countdownInterval);
+
+  countdownInterval = setInterval(() => {
+    remaining--;
+
+    if (remaining > 0) {
+      updateStatus(`☕ Brewing... ${remaining}s remaining`);
+    } else {
+      clearInterval(countdownInterval);
+      updateStatus("✅ Brew complete!");
+    }
+  }, 1000);
 }
