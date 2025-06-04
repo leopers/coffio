@@ -6,6 +6,9 @@
 
 extern String scheduledTime;
 
+extern bool isBrewing;
+extern unsigned long brewStartTime;
+
 void setupScheduler(int relayPin) {
   configTime(-3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
   Serial.print("⏳ Syncing time");
@@ -37,10 +40,9 @@ void checkAndTriggerSchedule(int relayPin) {
     if (scheduledTime.length() && now == scheduledTime) {
       Serial.println("⏰ Scheduled time matched — brewing now!");
       digitalWrite(relayPin, HIGH);
-      delay(30000); // Brew duration
-      digitalWrite(relayPin, LOW);
-      Serial.println("✅ Brew complete, relay OFF");
-      scheduledTime = "";
+      isBrewing = true;                 
+      brewStartTime = millis();         
+      scheduledTime = "";    
     }
   }
 }

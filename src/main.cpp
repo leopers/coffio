@@ -8,6 +8,9 @@
 
 #define RELAY_PIN D1
 
+bool isBrewing = false;
+unsigned long brewStartTime = 0;
+
 void setup() {
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, LOW);
@@ -43,5 +46,11 @@ void setup() {
 
 void loop() {
   handleWebRequests();
-  checkAndTriggerSchedule(RELAY_PIN);;
+  checkAndTriggerSchedule(RELAY_PIN);
+
+  if (isBrewing && (millis() - brewStartTime >= 30000UL)) {
+    digitalWrite(RELAY_PIN, LOW);
+    isBrewing = false;
+    Serial.println("☕ Brew complete (30 s elapsed).");
+  }
 }

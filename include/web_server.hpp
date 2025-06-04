@@ -8,6 +8,9 @@ extern ESP8266WebServer server;
 
 extern String scheduledTime;
 
+extern bool isBrewing;
+extern unsigned long brewStartTime;
+
 void setupWebServer(int relayPin) {
   server.serveStatic("/", LittleFS, "/index.html");
   server.serveStatic("/style.css", LittleFS, "/style.css");
@@ -16,19 +19,26 @@ void setupWebServer(int relayPin) {
   server.serveStatic("/cat.jpg", LittleFS, "/cat.jpg");
 
   server.on("/on", HTTP_GET, [relayPin]() {
-    digitalWrite(relayPin, HIGH);
-    Serial.println("🚀 Relay ON (coffee brewing)");
-    server.send(200, "text/plain", "Brewing");
-
-    delay(30000);
-    digitalWrite(relayPin, LOW);
-    Serial.println("✅ Manual brew complete, relay OFF");
+    if (!isBrewing) {
+      digitalWrite(relayPin, HIGH);
+      isBrewing     = true;
+      brewStartTime = millis();
+      Serial.println("🚀 Relay ON (coffee brewing, não‐bloqueante)");
+      server.send(200, "text/plain", "Brewing (will auto‐stop in 30 s)");
+    } else {
+      server.send(400, "text/plain", "Já está em brewing");
+    }
   });
 
   server.on("/off", HTTP_GET, [relayPin]() {
-    digitalWrite(relayPin, LOW);
-    Serial.println("🛑 Relay OFF (brew stopped)");
-    server.send(200, "text/plain", "Stopped");
+    if (isBrewing) {
+      digitalWrite(relayPin, LOW);
+      isBrewing = false;
+      Serial.println("🛑 Relay OFF (brew stopped)");
+      server.send(200, "text/plain", "Stopped");
+    } else {
+      server.send(400, "text/plain", "Não havia brewing");
+    }
   });
 
   server.on("/schedule", HTTP_GET, []() {
@@ -43,9 +53,16 @@ void setupWebServer(int relayPin) {
   });
 
   server.on("/cancel", HTTP_GET, [relayPin]() {
-    digitalWrite(relayPin, LOW);  // Turn off relay
-    Serial.println("Brew canceled.");
-    server.send(200, "text/plain", "Canceled");
+    if (isBrewing) {
+      digitalWrite(relayPin, LOW);
+      isBrewing = false;
+      Serial.println("Brew canceled.");
+      server.send(200, "text/plain", "Canceled");
+    } else {
+      scheduledTime = "";
+      Serial.println("Cancelado agendamento (se havia).");
+      server.send(200, "text/plain", "Canceled");
+    }
   });
 
   server.begin();
