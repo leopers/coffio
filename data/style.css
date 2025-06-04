@@ -166,3 +166,65 @@ input[type="time"] {
     transform: translateY(0);
   }
 }
+
+.cancel-button {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 500px) {
+  body {
+    padding: 10px;
+    height: auto;
+  }
+
+  .card {
+    width: 100%;
+    margin-top: 100px;
+    padding: 20px 16px;
+  }
+
+  .mascot {
+    width: 64px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .btn,
+  .cancel-button,
+  #scheduleBtn {
+    width: auto;
+    max-width: 90%;
+    padding: 12px 24px;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto;
+  }
+
+  .scheduler label {
+    font-size: 14px;
+  }
+
+  input[type="time"] {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .status-text {
+    font-size: 13px;
+  }
+}

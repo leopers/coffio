@@ -41,3 +41,12 @@ function startCountdown(seconds) {
     }
   }, 1000);
 }
+
+document.getElementById("cancelBtn").onclick = () => {
+  fetch("/cancel")
+    .then(() => {
+      if (countdownInterval) clearInterval(countdownInterval);
+      updateStatus("🛑 Brew canceled.");
+    })
+    .catch(() => updateStatus("⚠️ Cancel failed."));
+};

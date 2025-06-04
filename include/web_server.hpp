@@ -42,6 +42,12 @@ void setupWebServer(int relayPin) {
     }
   });
 
+  server.on("/cancel", HTTP_GET, [relayPin]() {
+    digitalWrite(relayPin, LOW);  // Turn off relay
+    Serial.println("Brew canceled.");
+    server.send(200, "text/plain", "Canceled");
+  });
+
   server.begin();
   Serial.println("✅ HTTP server started");
 }
