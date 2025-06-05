@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Keep viewport as-is, so Safari on iOS respects device width -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coffio Café ☕</title>
     <link
@@ -11,27 +12,33 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="card">
-      <div class="mascot-wrapper">
-        <img src="cat.jpg" alt="Coffio Mascot" class="mascot" />
+    <div class="container">
+      <div class="card">
+        <div class="mascot-wrapper">
+          <img src="cat.jpg" alt="Coffio Mascot" class="mascot" />
+        </div>
+
+        <h1>☕ Coffio Café</h1>
+        <p class="subtitle">Start your day with a warm cup ~</p>
+
+        <button id="makeCoffeeBtn" class="btn btn-primary">
+          ✨ Make Coffee Now
+        </button>
+
+        <div class="scheduler">
+          <label for="scheduleTime" style="display: block; text-align: center"
+            >⏰ Schedule Brew</label
+          >
+          <input type="time" id="scheduleTime" />
+          <button id="scheduleBtn" class="btn btn-secondary">
+            Set Time 💖
+          </button>
+        </div>
+
+        <button id="cancelBtn" class="btn cancel-button">Cancel Brew</button>
+
+        <p id="status" class="status-text">~ Awaiting your command ~</p>
       </div>
-
-      <h1>☕ Coffio Café</h1>
-      <p class="subtitle">Start your day with a warm cup ~</p>
-
-      <button id="makeCoffeeBtn" class="btn btn-primary">
-        ✨ Make Coffee Now
-      </button>
-
-      <div class="scheduler">
-        <label for="scheduleTime">⏰ Schedule Brew</label>
-        <input type="time" id="scheduleTime" />
-        <button id="scheduleBtn" class="btn btn-secondary">Set Time 💖</button>
-      </div>
-
-      <button id="cancelBtn" class="cancel-button">Cancel Brew</button>
-
-      <p id="status" class="status-text">~ Awaiting your command ~</p>
     </div>
 
     <script src="script.js"></script>

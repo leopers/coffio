@@ -1,154 +1,67 @@
+/* ----------------------------------------- */
+/* 1. Safe‐area insets + scrolling container */
+/* ----------------------------------------- */
 body {
   margin: 0;
-  padding: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
   font-family: "Quicksand", sans-serif;
   background: linear-gradient(135deg, #ffe0e9, #fff5f8);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  overflow-y: auto;
 }
 
-.card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 90%;
+.container {
+  width: 100%;
   max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------- */
+/* 2. Card styling (more top padding)       */
+/* ----------------------------------------- */
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 1.25rem; /* 20px */
+  box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.1); /* 0 10px 25px */
+  text-align: center;
+  padding: 3rem 1.5rem 1.5rem; /* 48px top to make room for mascot */
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
   transition: transform 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-0.3125rem); /* -5px */
 }
 
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  background: linear-gradient(90deg, #d27d9d, #ffb6c1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 30px;
-}
-
-.btn {
-  padding: 14px 24px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin: 8px 0;
-}
-
-.btn:active {
-  transform: scale(0.98);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary {
-  background-color: #ffb6c1;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #ff9db1;
-}
-
-.btn-secondary {
-  background-color: #dcd6f7;
-  color: #333;
-}
-
-.btn-secondary:hover {
-  background-color: #c3bfe0;
-}
-
-.scheduler {
-  margin-top: 20px;
-}
-
-.scheduler label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #d27d9d;
-}
-
-input[type="time"] {
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.status-text {
-  font-size: 14px;
-  margin-top: 20px;
-  color: #999;
-  transition: opacity 0.4s ease;
-}
-
-.status-text.fade {
-  opacity: 0.3;
-}
-
-@media (max-width: 400px) {
-  .card {
-    padding: 20px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 12px 20px;
-  }
-}
-
-.logo-card {
-  margin-bottom: 20px;
-  text-align: center;
-  animation: float 4s ease-in-out infinite;
-}
-
-.card {
-  position: relative; /* key for mascot positioning */
-  background: #fff;
-  padding: 40px 30px 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-  margin-top: 50px; /* spacing from top */
-}
-
+/* ----------------------------------------- */
+/* 3. Mascot positioning (pulled up less)   */
+/* ----------------------------------------- */
 .mascot-wrapper {
   position: absolute;
-  top: -60px; /* moved further up */
+  top: -1.75rem; /* -28px instead of -32px */
   left: 50%;
   transform: translateX(-50%);
   background: #fff5f8;
-  padding: 10px;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem; /* 12px */
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1); /* 0 5px 15px */
 }
 
 .mascot {
-  width: 80px;
+  width: 3.5rem; /* 56px (slightly smaller) */
   height: auto;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
+  border-radius: 0.9375rem; /* 15px */
   animation: float 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
 .mascot:hover {
@@ -160,71 +73,157 @@ input[type="time"] {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-0.375rem); /* -6px */
   }
   100% {
     transform: translateY(0);
   }
 }
 
-.cancel-button {
-  background-color: #ff6b6b;
-  color: white;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+/* ----------------------------------------- */
+/* 4. Typography                            */
+/* ----------------------------------------- */
+h1 {
+  font-size: 1.75rem; /* 28px */
+  margin-bottom: 0.5rem; /* 8px */
+  background: linear-gradient(90deg, #d27d9d, #ffb6c1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@media (max-width: 500px) {
-  body {
-    padding: 10px;
-    height: auto;
-  }
+.subtitle {
+  font-size: 0.875rem; /* 14px */
+  color: #666;
+  margin-bottom: 1.875rem; /* 30px */
+}
 
+/* ----------------------------------------- */
+/* 5. Buttons (80% width, centered)         */
+/* ----------------------------------------- */
+.btn {
+  display: block;
+  width: 80%; /* reduced from 100% */
+  max-width: 280px; /* caps the width on large screens */
+  margin: 0.5rem auto; /* center horizontally */
+  padding: 0.875rem 1.5rem; /* 14px 24px */
+  border: none;
+  border-radius: 0.75rem; /* 12px */
+  font-size: 1rem; /* 16px */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15); /* 0 4px 10px */
+}
+
+/* Primary */
+.btn-primary {
+  background-color: #ffb6c1;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #ff9db1;
+}
+
+/* Secondary */
+.btn-secondary {
+  background-color: #dcd6f7;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #c3bfe0;
+}
+
+/* Cancel */
+.cancel-button {
+  background-color: #ff6b6b;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0.125rem 0.125rem 0.375rem rgba(0, 0, 0, 0.1); /* 2px 2px 6px */
+}
+
+/* ----------------------------------------- */
+/* 6. Scheduler group                       */
+/* ----------------------------------------- */
+.scheduler {
+  margin-top: 1.25rem; /* 20px */
+}
+
+.scheduler label {
+  display: block;
+  margin-bottom: 0.625rem; /* 10px */
+  font-size: 1rem; /* 16px */
+  color: #d27d9d;
+  text-align: left;
+}
+
+input[type="time"] {
+  width: 100%;
+  font-size: 1rem; /* 16px */
+  padding: 0.625rem; /* 10px */
+  border: 1px solid #ccc;
+  border-radius: 0.625rem; /* 10px */
+  margin-bottom: 0.625rem; /* 10px */
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------- */
+/* 7. Status text                           */
+/* ----------------------------------------- */
+.status-text {
+  font-size: 0.875rem; /* 14px */
+  margin-top: 1.25rem; /* 20px */
+  color: #999;
+  transition: opacity 0.4s ease;
+}
+
+.status-text.fade {
+  opacity: 0.3;
+}
+
+/* ----------------------------------------- */
+/* 8. Responsive tweaks for small screens   */
+/* ----------------------------------------- */
+@media (max-width: 400px) {
   .card {
-    width: 100%;
-    margin-top: 100px;
-    padding: 20px 16px;
+    padding: 2.5rem 1rem 1rem; /* 40px top */
+    margin-top: 2rem; /* push down for notch */
   }
 
-  .mascot {
-    width: 64px;
+  .mascot-wrapper {
+    top: -1.5rem; /* -24px */
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 1.375rem; /* 22px */
   }
 
   .subtitle {
-    font-size: 13px;
-    margin-bottom: 20px;
+    font-size: 0.8125rem; /* 13px */
+    margin-bottom: 1.25rem; /* 20px */
   }
 
-  .btn,
-  .cancel-button,
-  #scheduleBtn {
-    width: auto;
-    max-width: 90%;
-    padding: 12px 24px;
-    font-size: 16px;
-    display: block;
-    margin: 10px auto;
+  .btn {
+    width: 85%; /* slightly wider on very small screens */
+    font-size: 0.9375rem; /* 15px */
+    padding: 0.75rem 1.5rem; /* 12px 24px */
   }
 
   .scheduler label {
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px */
   }
 
   input[type="time"] {
-    font-size: 14px;
-    width: 100%;
+    font-size: 0.875rem; /* 14px */
   }
 
   .status-text {
-    font-size: 13px;
+    font-size: 0.8125rem; /* 13px */
   }
 }
