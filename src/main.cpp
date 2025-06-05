@@ -16,10 +16,10 @@ void setup() {
   digitalWrite(RELAY_PIN, LOW);
   Serial.begin(115200);
   delay(100);
-  Serial.println("📡 Booting Coffio...");
+  Serial.println("Booting Coffio...");
 
   WiFi.begin(ssid, password);
-  Serial.print("🔌 Connecting to WiFi");
+  Serial.print("Connecting to WiFi");
   int retry = 0;
   while (WiFi.status() != WL_CONNECTED && retry < 30) {
     delay(500);
@@ -28,15 +28,15 @@ void setup() {
   }
 
   if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\n✅ Connected!");
-    Serial.print("🌐 IP Address: ");
+    Serial.println("\nConnected!");
+    Serial.print("IP Address: ");
     Serial.println(WiFi.localIP());
   } else {
-    Serial.println("\n❌ Failed to connect to WiFi.");
+    Serial.println("\nFailed to connect to WiFi.");
   }
 
   if (!LittleFS.begin()) {
-    Serial.println("❌ Failed to mount LittleFS");
+    Serial.println("Failed to mount LittleFS");
     return;
   }
 

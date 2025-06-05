@@ -23,10 +23,10 @@ void setupWebServer(int relayPin) {
       digitalWrite(relayPin, HIGH);
       isBrewing     = true;
       brewStartTime = millis();
-      Serial.println("🚀 Relay ON (coffee brewing, não‐bloqueante)");
+      Serial.println("Relay ON (coffee brewing, not-blocking)");
       server.send(200, "text/plain", "Brewing (will auto‐stop in 30 s)");
     } else {
-      server.send(400, "text/plain", "Já está em brewing");
+      server.send(400, "text/plain", "Already brewing");
     }
   });
 
@@ -34,7 +34,7 @@ void setupWebServer(int relayPin) {
     if (isBrewing) {
       digitalWrite(relayPin, LOW);
       isBrewing = false;
-      Serial.println("🛑 Relay OFF (brew stopped)");
+      Serial.println("Relay OFF (brew stopped)");
       server.send(200, "text/plain", "Stopped");
     } else {
       server.send(400, "text/plain", "Não havia brewing");
@@ -44,7 +44,7 @@ void setupWebServer(int relayPin) {
   server.on("/schedule", HTTP_GET, []() {
     if (server.hasArg("time")) {
       scheduledTime = server.arg("time");
-      Serial.print("📅 Brew scheduled for: ");
+      Serial.print("Brew scheduled for: ");
       Serial.println(scheduledTime);
       server.send(200, "text/plain", "Scheduled");
     } else {
@@ -66,7 +66,7 @@ void setupWebServer(int relayPin) {
   });
 
   server.begin();
-  Serial.println("✅ HTTP server started");
+  Serial.println("HTTP server started");
 }
 
 void handleWebRequests() {

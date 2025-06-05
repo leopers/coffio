@@ -11,12 +11,12 @@ extern unsigned long brewStartTime;
 
 void setupScheduler(int relayPin) {
   configTime(-3 * 3600, 0, "pool.ntp.org", "time.nist.gov");
-  Serial.print("⏳ Syncing time");
+  Serial.print("Syncing time");
   while (time(nullptr) < 100000) {
     Serial.print(".");
     delay(500);
   }
-  Serial.println("\n🕒 Time synced!");
+  Serial.println("\nTime synced!");
 }
 
 String getCurrentTime() {
@@ -34,11 +34,11 @@ void checkAndTriggerSchedule(int relayPin) {
 
   if (now != lastCheckedTime) {
     lastCheckedTime = now;
-    Serial.print("🕒 Current time: ");
+    Serial.print("Current time: ");
     Serial.println(now);
 
     if (scheduledTime.length() && now == scheduledTime) {
-      Serial.println("⏰ Scheduled time matched — brewing now!");
+      Serial.println("Scheduled time matched — brewing now!");
       digitalWrite(relayPin, HIGH);
       isBrewing = true;                 
       brewStartTime = millis();         
