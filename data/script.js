@@ -3,7 +3,7 @@ let countdownInterval = null;
 
 document.getElementById("makeCoffeeBtn").onclick = () => {
   fetch("/on")
-    .then(() => startCountdown(30))
+    .then(() => startCountdown(600))
     .catch(() => updateStatus("⚠️ Failed to start brew."));
 };
 

@@ -48,9 +48,9 @@ void loop() {
   handleWebRequests();
   checkAndTriggerSchedule(RELAY_PIN);
 
-  if (isBrewing && (millis() - brewStartTime >= 30000UL)) {
+  if (isBrewing && (millis() - brewStartTime >= 6000000UL)) {
     digitalWrite(RELAY_PIN, LOW);
     isBrewing = false;
-    Serial.println("☕ Brew complete (30 s elapsed).");
+    Serial.println("☕ Brew complete (600 s elapsed).");
   }
 }
